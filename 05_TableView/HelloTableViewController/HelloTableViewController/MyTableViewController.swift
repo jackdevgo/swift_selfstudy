@@ -19,10 +19,10 @@ class MyTableViewController: UITableViewController {
         }
     }
     
-    let fruitArray = ["apple","banana","mango","watermelone"]
-    let animalArray = ["cat","dog","elephant","rabbit"]
+    let fruitArray:NSMutableArray = ["apple","banana","mango","watermelone"]
+    let animalArray:NSMutableArray = ["cat","dog","elephant","rabbit"]
     let myRefreshControl = UIRefreshControl()
-    var tableData = [String]()
+    var tableData:NSMutableArray = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +65,7 @@ class MyTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = tableData[indexPath.row]
+        cell.textLabel?.text = tableData[indexPath.row] as? String
 
         // Configure the cell...
 
@@ -82,24 +82,28 @@ class MyTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableData.remove(at: indexPath.row)
+            tableData.removeObject(at: indexPath.row)
+            //tableData.remove(at: indexPath.row)
             tableView.reloadData()
         }
     }
     
-    /*
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        tableData.exchangeObject(at: sourceIndexPath.row, withObjectAt: destinationIndexPath.row)
+    }
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let shareAction = UITableViewRowAction(style: .normal, title: "Share", handler: {(action,indexPath) in print("share"); tableView.isEditing = false})
         shareAction.backgroundColor = UIColor.blue
         let doneAction = UITableViewRowAction(style: .normal, title: "Done", handler: {(action,indexPath) in print("Done"); tableView.isEditing = false})
         doneAction.backgroundColor = UIColor.gray
-        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete", handler: {(action,indexPath) in print("Delete"); self.tableData.remove(at: indexPath.row) ; self.tableView.reloadData(); tableView.isEditing = false})
+        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete", handler: {(action,indexPath) in print("Delete"); self.tableData.removeObject(at: indexPath.row) ; self.tableView.reloadData(); tableView.isEditing = false})
         deleteAction.backgroundColor = UIColor.red
 
        
         return [deleteAction,shareAction,doneAction]
     }
- */
+ 
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

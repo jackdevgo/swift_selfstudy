@@ -33,7 +33,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="vmp-ej-NvY">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Hdj-PR-vXt">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="Hdj-PR-vXt">
                             <connections>
                                 <action selector="editButtonPress:" destination="Hqz-Uq-Jkh" id="KQb-XP-uXp"/>
                             </connections>
