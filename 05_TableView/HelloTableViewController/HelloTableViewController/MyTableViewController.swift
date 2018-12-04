@@ -9,7 +9,16 @@
 import UIKit
 
 class MyTableViewController: UITableViewController {
-
+    @IBAction func editButtonPress(_ sender: UIBarButtonItem) {
+        if self.tableView.isEditing == true{
+            sender.title = "Edit"
+            self.tableView.isEditing = false
+        }else{
+            sender.title = "Done"
+            self.tableView.isEditing = true
+        }
+    }
+    
     let fruitArray = ["apple","banana","mango","watermelone"]
     let animalArray = ["cat","dog","elephant","rabbit"]
     let myRefreshControl = UIRefreshControl()
@@ -78,6 +87,7 @@ class MyTableViewController: UITableViewController {
         }
     }
     
+    /*
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let shareAction = UITableViewRowAction(style: .normal, title: "Share", handler: {(action,indexPath) in print("share"); tableView.isEditing = false})
         shareAction.backgroundColor = UIColor.blue
@@ -89,6 +99,7 @@ class MyTableViewController: UITableViewController {
        
         return [deleteAction,shareAction,doneAction]
     }
+ */
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
